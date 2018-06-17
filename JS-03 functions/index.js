@@ -47,7 +47,7 @@
 
 const logins = ["Mango", "robotGoogles", "Poly", "Aj4x1sBozz", "qwerty123"];
 
-let checkLoginValidity = (login) => login.length >= 4 && login.length <= 16;
+let checkLoginValidity = login => login.length >= 4 && login.length <= 16;
 let checkIfLoginExists = (logins, login) => logins.includes(login);
 
 let addLogin = (logins, login) => {
