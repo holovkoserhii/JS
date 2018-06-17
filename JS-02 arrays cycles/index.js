@@ -27,18 +27,16 @@ let total = 0;
 
 do {
   userInput = prompt("Enter a number");
-  if (userInput === null) {
-    break;
-  }
-  else if (Number.isNaN(Number(userInput))) {
+
+  if (Number.isNaN(Number(userInput))) {
     alert("You didn't specify a number");
   }
   else {
     numbers.push(+userInput);
   }
-} while (true);
+} while (userInput !== null);
 
-for (item of numbers) {
+for (let item of numbers) {
   total += item;
 }
 if (numbers.length > 0) {
