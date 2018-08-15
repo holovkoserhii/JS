@@ -44,18 +44,6 @@ const galleryItems = [
 ];
 
 
-// ul.addEventListener("click", changeView);
-// }
-
-// function changeView(evt) {
-//   const dest = evt.target.dataset.fullview;
-//   document.querySelector(".fullview").firstElementChild["src"] = dest;
-// }
-
-
-
-
-
 class Gallery {
   
   constructor({items, parentNode, defaultActiveItem}) {
@@ -75,7 +63,7 @@ class Gallery {
 
     const ul = document.querySelector(".preview");
     ul.innerHTML = this.createPreview(this.items);
-    ul.addEventListener("click", this.changeView);// BIND?
+    ul.addEventListener("click", this.changeView);
   };
 
   createPreview(array) {
@@ -87,94 +75,15 @@ class Gallery {
   }
   
   changeView(evt) {
+    const liS = Array.from(document.querySelectorAll(".preview > li > img"));
+    if(liS.indexOf(evt.target) < 0) return;
     const dest = evt.target.dataset.fullview;
     document.querySelector(".fullview").firstElementChild["src"] = dest;
   }
-
-  //   this.buttonOpen.addEventListener("click", this.show.bind(this));
-  //   this.submitBtn.addEventListener("submit", this.preventDefault.bind(this));
-  // }
-  
-  // hide(evt) {
-  //   if (evt.target !== this.modalWithOutline && evt.target !== this.closeModal) return;
-  //   this.modalWithOutline.classList.add("modal-hidden");
-  //   this.buttonOpen.addEventListener("click", this.show.bind(this));
-  //   this.modalWithOutline.removeEventListener("click", this.hide.bind(this));
-  //   this.closeModal.removeEventListener("click", this.hide.bind(this));
-  // }
-  // show(evt) {
-  //   this.modalWithOutline.classList.remove("modal-hidden");
-  //   this.modalWithOutline.addEventListener("click", this.hide.bind(this));
-  //   this.closeModal.addEventListener("click", this.hide.bind(this));
-  //   this.buttonOpen.removeEventListener("click", this.show.bind(this));
-  // }
-
-  
 }
-
 
 new Gallery({
 items: galleryItems,
 parentNode: document.querySelector('.image-gallery'),
 defaultActiveItem: 1
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// class Modal {
-  
-//   constructor({modalWithOutline, closeModal, submitBtn, buttonOpen}) {
-//     this.modalWithOutline = modalWithOutline;
-//     this.closeModal = closeModal;
-//     this.submitBtn = submitBtn;
-//     this.buttonOpen = buttonOpen;
-//     this.init();
-    
-//   }
-  
-//   init() {
-//     this.buttonOpen.addEventListener("click", this.show.bind(this));
-//   }
-  
-//   hide(evt) {
-//     if (evt.target !== this.modalWithOutline && evt.target !== this.closeModal) return;
-//     this.modalWithOutline.classList.add("modal-hidden");
-//     this.buttonOpen.addEventListener("click", this.show.bind(this));
-//     this.modalWithOutline.removeEventListener("click", this.hide.bind(this));
-//     this.closeModal.removeEventListener("click", this.hide.bind(this));
-//   }
-//   show(evt) {
-//     this.modalWithOutline.classList.remove("modal-hidden");
-//     this.modalWithOutline.addEventListener("click", this.hide.bind(this));
-//     this.closeModal.addEventListener("click", this.hide.bind(this));
-//     this.buttonOpen.removeEventListener("click", this.show.bind(this));
-//   }
-  
-// }
-
-// new Modal({
-//   "modalWithOutline": document.querySelector(".js-modal-backdrop"),
-//   "closeModal": document.querySelector(".js-close-modal"),
-//   "submitBtn": document.querySelector(".sub-form"),
-//   "buttonOpen": document.querySelector(".js-open-modal"),
-// });
