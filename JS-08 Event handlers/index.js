@@ -106,5 +106,6 @@ function changeView(evt) {
   const liS = Array.from(document.querySelectorAll(".preview > li > img"));
   if (liS.indexOf(evt.target) < 0) return;
   const dest = evt.target.dataset.fullview;
+  if(!dest) return;
   document.querySelector(".fullview").firstElementChild["src"] = dest;
 }
