@@ -1,0 +1,11 @@
+.product-item {
+    background: rgb(196, 153, 153);
+    width: 200px;
+    margin: 10px;
+    padding: 5px;
+}
+
+.result {
+    display: flex;
+    flex-wrap: wrap;
+}
