@@ -1,0 +1,24 @@
+/*
+   Import partials below
+*/
+@import 'normalize';
+
+form {
+  padding: 20px;
+}
+
+.card {
+  display: flex;
+  padding: 0 20px;
+  width: 600px;
+  background: rgba(248, 184, 123, 0.945);
+  margin-bottom: 15px;
+  margin-left: 20px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.url-features {
+  padding: 15px;
+  width: 400px;
+}
