@@ -42,6 +42,8 @@
 
 'use strict';
 
+//view
+
 var refs = {
   form: document.querySelector('form'),
   userUrlField: document.querySelector('#url'),
@@ -50,6 +52,7 @@ var refs = {
   template: Handlebars.compile(document.querySelector('#cards').innerHTML.trim())
 };
 
+//view
 refs.addButton.addEventListener('click', getInfo);
 document.addEventListener('DOMContentLoaded', showItems);
 refs.result.addEventListener('click', handleRemoveCard);
@@ -78,13 +81,14 @@ function getInfo(evt) {
   });
 }
 
+//view
 function checkValid(url) {
   var urlExp = /[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/gi;
   return urlExp.test(url);
 }
 
 function checkPresent(url) {
-  var sitesArr = JSON.parse(localStorage.getItem('sitesArray'));
+  var sitesArr = JSON.parse(localStorage.getItem('sitesArray')) || [];
   var matchArr = sitesArr.filter(function (el) {
     return el.url === url;
   });
@@ -92,9 +96,10 @@ function checkPresent(url) {
   return matchArr.length > 0;
 }
 
+//view
 function handleAddCard(obj) {
   if (checkPresent(obj.url)) {
-    alert("This url is present in your store!");
+    alert('This url is present in your store!');
     return;
   }
 
@@ -103,17 +108,19 @@ function handleAddCard(obj) {
   refs.form.reset();
 }
 
+//view
 function addToView(obj) {
   var markup = refs.template(obj);
   refs.result.insertAdjacentHTML('afterbegin', markup);
 }
 
 function addtoLocalStorage(obj) {
-  var sitesArr = JSON.parse(localStorage.getItem('sitesArray'));
+  var sitesArr = JSON.parse(localStorage.getItem('sitesArray')) || [];
   sitesArr.unshift(obj);
   localStorage.setItem('sitesArray', JSON.stringify(sitesArr));
 }
 
+//view
 function handleRemoveCard(evt) {
   var target = evt.target;
   if (target.tagName !== 'BUTTON' || !target.classList.contains('remove')) return;
@@ -123,12 +130,13 @@ function handleRemoveCard(evt) {
   removeFromLocalStorage(cardUrl);
 }
 
+//view
 function removeFromView(elem) {
   elem.remove();
 }
 
 function removeFromLocalStorage(id) {
-  var sitesArr = JSON.parse(localStorage.getItem('sitesArray'));
+  var sitesArr = JSON.parse(localStorage.getItem('sitesArray')) || [];
   var objToDelete = sitesArr.filter(function (el) {
     return el.url === id;
   })[0];
@@ -136,9 +144,10 @@ function removeFromLocalStorage(id) {
   localStorage.setItem('sitesArray', JSON.stringify(sitesArr));
 }
 
+//view
 function showItems(evt) {
   evt.preventDefault();
-  var sitesArr = JSON.parse(localStorage.getItem('sitesArray'));
+  var sitesArr = JSON.parse(localStorage.getItem('sitesArray')) || [];
   var markup = sitesArr.map(function (el) {
     return refs.template(el);
   });

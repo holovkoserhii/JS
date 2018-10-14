@@ -42,6 +42,7 @@
 
 'use strict';
 
+//view
 const refs = {
   form: document.querySelector('form'),
   userUrlField: document.querySelector('#url'),
@@ -52,6 +53,7 @@ const refs = {
   ),
 };
 
+//view
 refs.addButton.addEventListener('click', getInfo);
 document.addEventListener('DOMContentLoaded', showItems);
 refs.result.addEventListener('click', handleRemoveCard);
@@ -79,21 +81,23 @@ function getInfo(evt) {
     .catch(error => console.log('Site not found! ' + error));
 }
 
+//view
 function checkValid(url) {
   const urlExp = /[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/gi;
   return urlExp.test(url);
 }
 
 function checkPresent(url) {
-  const sitesArr = JSON.parse(localStorage.getItem('sitesArray'));
+  const sitesArr = JSON.parse(localStorage.getItem('sitesArray')) || [];
   const matchArr = sitesArr.filter(el => el.url === url);
   console.log(matchArr);
   return matchArr.length > 0;
 }
 
+//view
 function handleAddCard(obj) {
   if (checkPresent(obj.url)) {
-    alert("This url is present in your store!");
+    alert('This url is present in your store!');
     return;
   }
 
@@ -102,17 +106,19 @@ function handleAddCard(obj) {
   refs.form.reset();
 }
 
+//view
 function addToView(obj) {
   const markup = refs.template(obj);
   refs.result.insertAdjacentHTML('afterbegin', markup);
 }
 
 function addtoLocalStorage(obj) {
-  const sitesArr = JSON.parse(localStorage.getItem('sitesArray'));
+  const sitesArr = JSON.parse(localStorage.getItem('sitesArray')) || [];
   sitesArr.unshift(obj);
   localStorage.setItem('sitesArray', JSON.stringify(sitesArr));
 }
 
+//view
 function handleRemoveCard(evt) {
   const target = evt.target;
   if (target.tagName !== 'BUTTON' || !target.classList.contains('remove'))
@@ -123,20 +129,22 @@ function handleRemoveCard(evt) {
   removeFromLocalStorage(cardUrl);
 }
 
+//view
 function removeFromView(elem) {
   elem.remove();
 }
 
 function removeFromLocalStorage(id) {
-  const sitesArr = JSON.parse(localStorage.getItem('sitesArray'));
+  const sitesArr = JSON.parse(localStorage.getItem('sitesArray')) || [];
   const objToDelete = sitesArr.filter(el => el.url === id)[0];
   sitesArr.splice(sitesArr.indexOf(objToDelete), 1);
   localStorage.setItem('sitesArray', JSON.stringify(sitesArr));
 }
 
+//view
 function showItems(evt) {
   evt.preventDefault();
-  const sitesArr = JSON.parse(localStorage.getItem('sitesArray'));
+  const sitesArr = JSON.parse(localStorage.getItem('sitesArray')) || [];
   const markup = sitesArr.map(el => refs.template(el));
   markup.map(el => refs.result.insertAdjacentHTML('beforeend', el));
 }
