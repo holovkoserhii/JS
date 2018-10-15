@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>
+        form {
+          padding: 20px;
+        }
+        .card {
+          display: flex;
+          padding: 0 20px;
+          width: 600px;
+          background: rgba(248, 184, 123, 0.945);
+          margin-bottom: 15px;
+          margin-left: 20px;
+          align-items: center;
+          justify-content: space-between;
+        }
+        .url-features {
+          padding: 15px;
+          width: 400px;
+        }
+        </style>
+    <title>Document</title>
+</head>
+
+<body>
+    <form action="get" class="input">
+        <input type="url" name="url" id="url">
+        <button type="submit">Add</button>
+    </form>
+    <p class="result"></p>
+
+    <template id="cards">
+        <div class="card">
+            <img src="{{image}}" alt="card-pic" width="100" height="100">
+            <div class="url-features">
+                <a class="url-id" href="{{url}}">{{url}}</a>
+                <p class="title">Title: {{title}}</p>
+                <p class="description">Description: {{description}}</p>
+            </div>
+            <div class="controls">
+                <p>Controls:</p>
+                <button class="remove">Remove</button>
+            </div>
+        </div>
+    </template>
+
+    <div class="test-cases">
+        <br>
+        1) Зовнішня форма карток відповідає закладеній версткою концепції<br>
+        Завантажую сторінку - співставляю зовнішній вигляд окремої картки з DOM-деревом та
+        правилами CSS, що повинні до нього діяти - повинно співпадати.<br>
+        <br>
+        2) При завантаженні стартової сторінки з'являється поле для введення URL майбутньої
+        закладки, а також кнопка Add.<br>
+        Завантажую сторінку - перераховані два елемента повинні бути присутні у верхній частині
+        таблиці.<br>
+        <br>
+        ***read***<br>
+        3) При завантаженні стартової сторінки відразу з'являються картки раніше доданих сайтів із
+        закладок. В даному випадку вони приїжджають із localStorage.<br>
+        Завантажую сторінку - переглядаю кількість на наповнення карток - повинно співпадати з
+        відповідними об'єктами із localStorage/sitesArray<br>
+        <br>
+        ***create***<br>
+        4) Після введення url система перевіряє, чи валідна ця адреса. Якщо не валідна - видає
+        alert. Якщо валідна, робить додаткові перевірки. У випадку їх успішного проходження додає
+        нову картку у верхню частину секції result.<br>
+        4.1. Вводимо ukr.net, натискаємо Add - валідна, додається картка.<br>
+        4.2. Вводимо ukrnet, натискаємо Add - невалідна, бачимо alert, картка не додається.<br>
+        4.3. Вводимо unian.ua, натискаємо Add - валідна, додається картка.<br>
+        4.4. Вводимо unian.ua7777777, натискаємо Add - невалідна, бачимо alert, картка не
+        додається.<br>
+        <br>
+        5) Після введення url система перевіряє, чи є ця адреса у закладках даного користувача.
+        Якщо вже присутня - видає alert. Її немає, робить додаткові перевірки. У випадку їх
+        успішного проходження додає нову картку у верхню частину секції result.<br>
+        Передумова: сайту https://github.com/ немає серед закладок.<br>
+        5.1. Вводимо https://github.com/, натискаємо Add - валідна, додається картка.<br>
+        5.2. Вводимо https://github.com/ повторно, натискаємо Add - бачимо alert, картка не
+        додається.<br>
+        <br>
+        6) До закладок додаються лише існуючі сайти.<br>
+        У поле url вводжу http://non-existing-site.com/ (неіснуючий сайт) - нічого не відбувається,
+        картка не створюється.<br>
+        <br>
+        ***delete***<br>
+        7) При натисненні кнопки Remove конкретної картки - видаляється саме ця картка, інші картки
+        зсуваються на її місце.
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
+    <script src="./dist/main.js"></script>
+<script type="text/javascript" src="main.js?bd3e20a1af488faaa1fa"></script></body>
+
+</html>
